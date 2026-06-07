@@ -1,0 +1,224 @@
+:root {
+  --good: #66bb6a;
+  --moderate: #ffd54f;
+  --unhealthy-sensitive: #ffa726;
+  --unhealthy: #ef5350;
+  --very-unhealthy: #ab47bc;
+  --hazardous: #8d6e63;
+  --ink: #25394a;
+  --muted: #5b7c93;
+  --bg: #d9edfa;
+  --card-bg: #ffffff;
+  --accent: #2f8fcf;
+  --accent-deep: #1c5d8a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Comic Sans MS", "Comic Sans", "Comic Neue", "Chalkboard SE", cursive, sans-serif;
+  color: var(--ink);
+  line-height: 1.5;
+
+  /* Light-blue backdrop tiled with friendly white surgical masks — a nod
+     to the air-quality theme. The SVG tile below is inlined as a data URI
+     so no extra image asset is needed. */
+  background-color: var(--bg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Crect width='160' height='160' fill='%23d9edfa'/%3E%3Cg transform='translate(20,52)'%3E%3Cpath d='M0 20 Q50 -8 100 20 L100 46 Q50 68 0 46 Z' fill='%23ffffff' stroke='%237fb8e0' stroke-width='2.5'/%3E%3Cpath d='M0 28 Q-20 20 -14 46' fill='none' stroke='%237fb8e0' stroke-width='2.5'/%3E%3Cpath d='M100 28 Q120 20 114 46' fill='none' stroke='%237fb8e0' stroke-width='2.5'/%3E%3Cline x1='24' y1='24' x2='24' y2='44' stroke='%23bcdcf2' stroke-width='2'/%3E%3Cline x1='50' y1='18' x2='50' y2='48' stroke='%23bcdcf2' stroke-width='2'/%3E%3Cline x1='76' y1='24' x2='76' y2='44' stroke='%23bcdcf2' stroke-width='2'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  background-attachment: fixed;
+}
+
+h1, h2, h3, .panel h2, .badge, .deal-card .brand {
+  font-family: "Comic Sans MS", "Comic Sans", "Comic Neue", "Chalkboard SE", cursive, sans-serif;
+}
+
+/* ---------------------------------------------------------------
+   Flying condor — soars across the top of the page on a loop
+   --------------------------------------------------------------- */
+.condor-flyby {
+  position: fixed;
+  top: 6%;
+  left: -160px;
+  width: 140px;
+  z-index: 500;
+  pointer-events: none;
+  animation: condor-fly 22s linear infinite;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+}
+
+.condor-flyby svg {
+  width: 100%;
+  height: auto;
+  animation: condor-flap 1.6s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes condor-fly {
+  0%   { left: -160px; top: 6%; }
+  50%  { left: 60vw; top: 12%; }
+  100% { left: 110vw; top: 6%; }
+}
+
+@keyframes condor-flap {
+  0%, 100% { transform: scaleY(1); }
+  50%      { transform: scaleY(0.85); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .condor-flyby, .condor-flyby svg {
+    animation: none;
+  }
+}
+
+.site-header {
+  background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+  color: white;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.site-header h1 {
+  margin: 0 0 0.25rem 0;
+  font-size: 2rem;
+}
+
+.tagline {
+  margin: 0;
+  opacity: 0.9;
+}
+
+.updated {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.panel {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.panel h2 {
+  margin-top: 0;
+  margin-bottom: 0.25rem;
+}
+
+.panel-subtitle {
+  margin-top: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+#map {
+  height: 420px;
+  border-radius: 8px;
+  margin-top: 0.75rem;
+  z-index: 0;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.legend-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.station-popup b {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.badge {
+  display: inline-block;
+  background: #fff3cd;
+  color: #856404;
+  border-radius: 6px;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.75rem;
+  margin-left: 0.4rem;
+}
+
+.word-card {
+  margin-top: 0.75rem;
+  border: 1px dashed var(--accent);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  background: #eef7fd;
+}
+
+.word-date {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.word-main {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.word-translation {
+  font-size: 1rem;
+  color: var(--ink);
+  font-style: italic;
+}
+
+.word-example {
+  margin: 0.5rem 0 0 0;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.word-example-translation {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.site-footer {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--muted);
+  padding: 1.5rem 1rem 2.5rem 1rem;
+}
+
+.site-footer a {
+  color: var(--accent);
+}
+
+@media (max-width: 600px) {
+  .site-header h1 { font-size: 1.5rem; }
+  #map { height: 320px; }
+}

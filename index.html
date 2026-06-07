@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aire Santiago — Daily Air Quality for Santiago, Chile</title>
+
+  <!-- Leaflet for the map -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+
+  <!-- Chart.js for forecast / historical charts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+
+  <!-- Comic Neue: a friendly fallback for systems without Comic Sans MS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- A friendly Andean condor soaring across the page -->
+  <div class="condor-flyby" aria-hidden="true">
+    <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#3b3b3b">
+        <!-- body -->
+        <ellipse cx="100" cy="55" rx="16" ry="9"/>
+        <circle cx="118" cy="50" r="6"/>
+        <!-- left wing -->
+        <path d="M100 52 C 70 20, 25 18, 5 38 C 35 38, 70 46, 100 58 Z"/>
+        <!-- right wing -->
+        <path d="M100 52 C 130 20, 175 18, 195 38 C 165 38, 130 46, 100 58 Z"/>
+        <!-- tail -->
+        <path d="M88 60 L 70 72 L 92 64 Z"/>
+      </g>
+      <!-- white neck ruff, characteristic of the Andean condor -->
+      <ellipse cx="110" cy="52" rx="5" ry="4" fill="#f2f2f2"/>
+    </svg>
+  </div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <h1>🌫️ Aire Santiago</h1>
+      <p class="tagline">Daily air quality, forecasts, and trends for Santiago de Chile</p>
+      <p class="updated" id="last-updated">Loading current conditions…</p>
+    </div>
+  </header>
+
+  <main>
+    <!-- LIVE MAP SECTION -->
+    <section class="panel" id="map-section">
+      <h2>Live Air Quality by Station</h2>
+      <p class="panel-subtitle">
+        Readings near Santiago's official monitoring stations (MACAM-RM network), color-coded by current PM2.5 level.
+      </p>
+      <div id="map"></div>
+      <div class="legend" id="map-legend"></div>
+    </section>
+
+    <!-- FORECAST SECTION -->
+    <section class="panel" id="forecast-section">
+      <h2>3-Day Forecast</h2>
+      <p class="panel-subtitle">Projected PM2.5 levels for central Santiago over the next few days.</p>
+      <canvas id="forecast-chart" height="100"></canvas>
+    </section>
+
+    <!-- HISTORICAL SECTION -->
+    <section class="panel" id="history-section">
+      <h2>How Does Today Compare?</h2>
+      <p class="panel-subtitle">Today's average PM2.5 vs. the same week last month and last year.</p>
+      <canvas id="history-chart" height="100"></canvas>
+    </section>
+
+    <!-- SPANISH WORD OF THE DAY SECTION -->
+    <section class="panel" id="word-section">
+      <h2>Spanish Word of the Day</h2>
+      <p class="panel-subtitle">A new Spanish noun every day — perfect for picking up a little local vocabulary.</p>
+      <div id="word-of-day"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      Air quality data via <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (based on CAMS atmospheric models).
+      Official Chilean monitoring data is published by <a href="https://sinca.mma.gob.cl/" target="_blank" rel="noopener">SINCA</a>, Ministerio del Medio Ambiente.
+      This is a prototype — not an official source.
+    </p>
+  </footer>
+
+  <script src="stations.js"></script>
+  <script src="words.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
