@@ -77,13 +77,18 @@ async function initMap() {
 
     readings.forEach((r) => {
       const level = levelForPM25(r.pm25);
-      const marker = L.circleMarker([r.lat, r.lon], {
-        radius: 12,
-        fillColor: level.color,
-        color: "#ffffff",
-        weight: 2,
-        fillOpacity: 0.9,
-      }).addTo(map);
+      const displayValue = r.pm25 !== null ? Math.round(r.pm25) : "—";
+      const icon = L.divIcon({
+        className: "",
+        html: `<div class="station-marker" style="background:${level.color};">
+                 <span class="station-value">${displayValue}</span>
+                 <span class="station-unit">µg/m³</span>
+               </div>`,
+        iconSize: [64, 40],
+        iconAnchor: [32, 20],
+        popupAnchor: [0, -24],
+      });
+      const marker = L.marker([r.lat, r.lon], { icon }).addTo(map);
 
       marker.bindPopup(`
         <div class="station-popup">
